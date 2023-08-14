@@ -19,11 +19,10 @@ export const mainProfileSchema = yup.object({
     .max(15, 'Номер слишком длинный'),
 })
 
-const profileSchema = yup
+export const profileSchema = yup
   .object({
-    display_name: yup.string().min(3, 'Имя должно быть длиннее 3 символов'),
-    fileAvatar: yup.mixed(),
+    display_name: yup.string().required().min(3, 'Имя должно быть длиннее 3 символов'),
   })
   .concat(mainProfileSchema)
 
-export default profileSchema
+profileSchema

@@ -30,6 +30,7 @@ const Profile = () => {
     if (hasUserData)
       setDefaultValues({
         ...user,
+        fileAvatar: null,
         display_name: user.display_name ?? `${user.first_name} ${user.second_name}`,
       })
   }, [])
@@ -38,6 +39,7 @@ const Profile = () => {
     if (hasUserData)
       setDefaultValues({
         ...user,
+        fileAvatar: null,
         display_name: user.display_name ?? `${user.first_name} ${user.second_name}`,
       })
   }, [user])
@@ -58,9 +60,11 @@ const Profile = () => {
     setModalSuccess(false)
   }, [setModalSuccess])
 
-  const handleSubmitUser = (data: TProfile) => {
-    setIsUpdateUser(true)
+  const handleSubmitUser = async (data: TProfile) => {
+    console.log(data)
+
     dispatch(updateUser(data))
+    setIsUpdateUser(true)
   }
 
   const handleLogOut = useCallback(() => {
@@ -68,10 +72,11 @@ const Profile = () => {
   }, [dispatch])
 
   if (userValues) {
+    const { avatar, fileAvatar, ...values } = userValues
     return (
       <>
         <ProfileAvatar />
-        <ProfileForm onSubmitUser={handleSubmitUser} defaultFormValues={userValues} />
+        <ProfileForm onSubmitUser={handleSubmitUser} defaultFormValues={values} />
         <Footer>
           <Button onClick={handleToggleTheme} ref={themeBtnRef}>
             Toggle theme

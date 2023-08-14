@@ -10,9 +10,9 @@ if (isDev) dotenv.config({ path: '../../.env' })
 else dotenv.config()
 
 const { POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT, POSTGRES_HOST } = process.env
-
+console.log(POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB, POSTGRES_PORT, POSTGRES_HOST)
 const sequelizeOptions: SequelizeOptions = {
-  host: isDev ? 'localhost' : POSTGRES_HOST,
+  host: POSTGRES_HOST || 'localhost',
   port: Number(POSTGRES_PORT),
   username: POSTGRES_USER,
   password: POSTGRES_PASSWORD,

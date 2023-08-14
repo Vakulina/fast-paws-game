@@ -1,87 +1,39 @@
-### Как запускать?
+## Браузерная игра Fast Paws
+Котику на пути встречаются препятствия или мелкие животные (добыча). Для того, чтобы поймать добычу, нужно на нее запрыгнуть. Для прыжка моно использовать пробел или "тап".
 
-1. Убедитесь что у вас установлен `node` и `docker`
-2. Выполните команду `yarn bootstrap` - это обязательный шаг, без него ничего работать не будет :)
-3. Выполните команду `yarn dev`
-4. Выполните команду `yarn dev --scope=client` чтобы запустить только клиент
-5. Выполните команду `yarn dev --scope=server` чтобы запустить только server
+### [Механика игры](https://github.com/Vakulina/fast-paws-game/blob/main/GAME-INFO.md)
 
-### Как добавить зависимости?
+### Реализованный функционал
+- Страница с игрой
+- Создание/редактирование профиля
+- Форум
+- Лидерборд (рейтинг игроков)
+- Темизация
+- Возможность использовать offline (после первой загрузки и кэширования ресурсов)
 
-В этом проекте используется `monorepo` на основе [`lerna`](https://github.com/lerna/lerna)
+### Используемые технологии
+- React, React Router, Redux Toolkit
+- Typescript
+- Canvas API
+- styled component
+- OAuth Яндекс (сейчас не работает, т.к. не оплачен домен)
+- Service Worker
+- Express
+- PostgreSQL
+- Vite
+- Docker, Docker-Compose
+- Server Side Rendering (SSR)
+- nginx
+- jest
+- proxy
 
-Чтобы добавить зависимость для клиента
-`yarn lerna add {your_dep} --scope client`
+### Как запускать локально
+1. Шаблон переменных находится в файле .env.sample. Создайте файл .env в корне проекта и скопируйте туда переменные.
+2. Убедитесь что у вас установлен `node` и `docker`
+3. Выполните команду `yarn bootstrap` - это обязательный шаг, без него ничего работать не будет :)
+4. Выполните команду `yarn build`
+5. Запустите контейнер для БД `yarn docker:db`
+6. Выполните команду `yarn dev:server` чтобы запустить сервер (на собранный контейнер с client-частью будет создана символьная ссылка)
+7. Проект запустится на 5000 порту
 
-Для сервера
-`yarn lerna add {your_dep} --scope server`
-
-И для клиента и для сервера
-`yarn lerna add {your_dep}`
-
-Если вы хотите добавить dev зависимость, проделайте то же самое, но с флагом `dev`
-`yarn lerna add {your_dep} --dev --scope server`
-
-### Тесты
-
-Для клиента используется [`react-testing-library`](https://testing-library.com/docs/react-testing-library/intro/)
-
-`yarn test`
-
-### Линтинг
-
-`yarn lint`
-
-### Форматирование prettier
-
-`yarn format`
-
-### Production build
-
-`yarn build`
-
-И чтобы посмотреть что получилось
-
-`yarn preview --scope client`
-`yarn preview --scope server`
-
-### Docker контейнер для DB
-
-Перед запуском необходимо убедиться что запущен docker daemon
-
-`yarn docker:db`
-
-## Хуки
-
-В проекте используется [lefthook](https://github.com/evilmartians/lefthook)
-Если очень-очень нужно пропустить проверки, используйте `--no-verify` (но не злоупотребляйте :)
-
-## Ой, ничего не работает :(
-
-Откройте issue, я приду :)
-
-## Автодеплой статики на vercel
-
-Зарегистрируйте аккаунт на [vercel](https://vercel.com/)
-Следуйте [инструкции](https://vitejs.dev/guide/static-deploy.html#vercel-for-git)
-В качестве `root directory` укажите `packages/client`
-
-Все ваши PR будут автоматически деплоиться на vercel. URL вам предоставит деплоящий бот
-
-## Production окружение в докере
-
-Перед первым запуском выполните `node init.js`
-
-`docker compose up` - запустит три сервиса
-
-1. nginx, раздающий клиентскую статику (client)
-2. node, ваш сервер (server)
-3. postgres, вашу базу данных (postgres)
-
-Если вам понадобится только один сервис, просто уточните какой в команде
-`docker compose up {sevice_name}`, например `docker compose up server`
-
-## Environment
-
-Шаблон переменных находится в файле .env.sample
-Создайте файл .env в корне проекта и скопируйте туда переменные.
+### [Деплой](https://2d96a7d3e2d2.vps.myjino.ru/)
