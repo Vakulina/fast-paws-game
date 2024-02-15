@@ -106,7 +106,7 @@ async function startServer() {
       const [initialState, appHtml, css] = await render(url, res.locals.axiosClient, currentTheme)
 
       const initStateSerialized = JSON.stringify(initialState).replace(/</g, '\\u003c')
-      const stateMarkup = `<script>window.__INITIAL_STATE__=${initStateSerialized}; window.__REDIRECT_URL__='${process.env.REDIRECT_URL}'</script>`
+      const stateMarkup = `<script>window.__INITIAL_STATE__=${initStateSerialized}; window.__REDIRECT_URL__='${process.env.REDIRECT_URL}'; window.__CLIENT_ID__='${process.env.CLIENT_ID}'</script>`
       const swRegistration = ` <script id="vite-plugin-pwa:register-sw" src="/registerSW.js" type="module"></script>`
       const html = template
         .replace('<!--css-outlet-->', css)

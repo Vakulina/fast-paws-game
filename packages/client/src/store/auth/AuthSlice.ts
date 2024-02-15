@@ -4,7 +4,6 @@ import {
   buildGetUser,
   buildLogOut,
   buildRegistration,
-  buildServiceId,
   buildSignInUser,
   buildUpdateAvatar,
   buildUpdatePassword,
@@ -33,7 +32,6 @@ export const authSlice = createSlice({
   },
   extraReducers: builder => {
     buildSignInUser(builder)
-    buildServiceId(builder)
     buildRegistration(builder)
     buildLogOut(builder)
     buildGetUser(builder)

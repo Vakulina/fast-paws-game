@@ -1,4 +1,4 @@
-## Браузерная игра Fast Paws
+## [Браузерная игра Fast Paws](2d96a7d3e2d2.vps.myjino.ru/)
 Котику на пути встречаются препятствия или мелкие животные (добыча). Для того, чтобы поймать добычу, нужно на нее запрыгнуть. Для прыжка моно использовать пробел или "тап".
 
 ### [Механика игры](https://github.com/Vakulina/fast-paws-game/blob/main/GAME-INFO.md)
@@ -16,8 +16,10 @@
 - Typescript
 - Canvas API
 - styled component
-- OAuth Яндекс (сейчас не работает, т.к. не оплачен домен)
+- JWT-Авторизация (реализация клиентской части)
+- OAuth Яндекс
 - Service Worker
+- proxy - проксирование запросов к стороннему серверу [ya-praktikum](https://ya-praktikum.tech/api/v2/swagger/#/), используемому для авторизации пользователей
 - Express
 - PostgreSQL
 - Vite
@@ -25,7 +27,6 @@
 - Server Side Rendering (SSR)
 - nginx
 - jest
-- proxy
 
 ### Как запускать локально
 1. Шаблон переменных находится в файле .env.sample. Создайте файл .env в корне проекта и скопируйте туда переменные.

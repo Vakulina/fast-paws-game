@@ -1,27 +1,19 @@
-import FetchApi from '../utils/fetchApi'
+import axios from 'axios'
 import isServer from '../utils/isServerChecker'
 
-const REDIRECT_URL = !isServer ? window.__REDIRECT_URL__ : null
-const redirectUrl = REDIRECT_URL || 'http://localhost:5000'
-const oauthUrlBase = 'https://oauth.yandex.ru/authorize'
+const redirectUrl = !isServer ? window.__REDIRECT_URL__ : null
+const oauthUrlBase = 'https://oauth.yandex.ru'
+const CLIENT_ID = !isServer ? window?.__CLIENT_ID__ : null
 
 class OAuthApi {
-  public getServiceId() {
-    return FetchApi.get<{ service_id: string }>(`/oauth/yandex/service-id/?redirect_uri=${redirectUrl}`)
+  public getOAuthUrl() {
+    return `${oauthUrlBase}/authorize/?response_type=token&client_id=${CLIENT_ID}&redirect_uri=${redirectUrl}/yandex-system-page`
   }
-
-  public getOAuthUrl(serviceId: string) {
-    return `${oauthUrlBase}/?response_type=code&client_id=${serviceId}&redirect_uri=${redirectUrl}`
-  }
-
-  public signin(code: string) {
-    return FetchApi.post<string>('/oauth/yandex/', {
-      body: {
-        code,
-        redirect_uri: redirectUrl,
-      },
-    })
+  public async getYandexUserData(token: string) {
+    return axios
+      .create({ baseURL: 'https://login.yandex.ru', withCredentials: false })
+      .get(`/info?format=json&oauth_token=${token}`, {})
+      .then(res => res.data)
   }
 }
-
 export default new OAuthApi()

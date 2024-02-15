@@ -13,7 +13,7 @@
     "format": "lerna run format",
     "preview": "lerna run preview",
     "package-link": "lerna run build --scope=client && lerna run link --scope=client && lerna run link:client --scope=server",
-    "docker": "docker compose -f docker-compose.yml up server",
+    "docker": "docker compose -f docker-compose.yml up --build -d server",
     "docker:db": "docker compose -f docker-compose.yml up -d postgres pgadmin"
   },
   "license": "MIT",
@@ -27,6 +27,5 @@
     "lerna": "^5.4.3",
     "typescript": "^5.1.3"
   },
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }

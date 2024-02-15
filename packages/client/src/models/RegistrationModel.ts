@@ -14,5 +14,5 @@ export type TSignUpFormValues = {
   second_name: string
   phone: string | number
   password: string
-  repeated_password: string
+  repeated_password?: string
 }

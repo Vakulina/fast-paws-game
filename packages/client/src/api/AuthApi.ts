@@ -14,6 +14,13 @@ class AuthApi {
   public signup(body: TSignUpFormValues) {
     return FetchApi.post<{ id: number }>('/auth/signup', { body })
   }
+  public setOAuthToken(token: string) {
+    return FetchApi.post('/auth/oauth', {
+      body: {
+        token,
+      },
+    })
+  }
 }
 
 export default new AuthApi()

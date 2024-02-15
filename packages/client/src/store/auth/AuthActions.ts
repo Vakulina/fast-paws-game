@@ -35,28 +35,10 @@ export const updatePassword = createAsyncThunk(
   }
 )
 
-export const signInUser = createAsyncThunk(
-  'user/signIn',
-  async (body: TSignIn | string, { dispatch, rejectWithValue }) => {
-    try {
-      if (typeof body === 'string') {
-        await OAuthApi.signin(body)
-      } else {
-        await AuthApi.signin(body)
-      }
-
-      return dispatch(getUser())
-    } catch (e) {
-      return rejectWithValue(e)
-    }
-  }
-)
-
-export const getServiceId = createAsyncThunk('auth/getServiceId', async (_, { rejectWithValue }) => {
+export const signInUser = createAsyncThunk('user/signIn', async (body: TSignIn, { dispatch, rejectWithValue }) => {
   try {
-    const response = await OAuthApi.getServiceId()
-    const { service_id: serviceId } = response
-    location.href = OAuthApi.getOAuthUrl(serviceId as string)
+    await AuthApi.signin(body)
+    return dispatch(getUser())
   } catch (e) {
     return rejectWithValue(e)
   }

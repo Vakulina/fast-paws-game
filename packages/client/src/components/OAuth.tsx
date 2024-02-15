@@ -2,16 +2,23 @@ import Button from '../ui/button'
 import IconYandex from '../assets/icons/IconYandex'
 import styled from 'styled-components'
 import { useAppDispatch, useAppSelector } from '../hooks/store'
-import { getServiceId } from '../store/auth/AuthActions'
 import { authSelectors } from '../store/auth/AuthSelectors'
+import { useYandexOAuth } from '../hooks/useYandexOauth'
+import { useEffect } from 'react'
+import { getUser } from '../store/auth/AuthActions'
 
 const OAuth = () => {
-  const dispatch = useAppDispatch()
+  const { init, authenticated } = useYandexOAuth()
   const serviceIdStatus = useAppSelector(authSelectors.getServiceIdStatus)
+  const dispatch = useAppDispatch()
 
-  const handleClick = () => {
-    dispatch(getServiceId())
+  const handleClick = async () => {
+    await init()
   }
+
+  useEffect(() => {
+    dispatch(getUser())
+  }, [authenticated])
 
   return (
     <>

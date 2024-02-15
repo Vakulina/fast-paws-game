@@ -1,14 +1,5 @@
 import { ActionReducerMapBuilder } from '@reduxjs/toolkit'
-import {
-  getServiceId,
-  getUser,
-  logOut,
-  registration,
-  signInUser,
-  updateAvatar,
-  updatePassword,
-  updateUser,
-} from './AuthActions'
+import { getUser, logOut, registration, signInUser, updateAvatar, updatePassword, updateUser } from './AuthActions'
 import { handleError } from '../../utils/handleError'
 import { ALREADY_LOGIN } from '../../constants/errors'
 import { TUser } from '../../models/UserModel'
@@ -30,20 +21,6 @@ export const buildSignInUser = (builder: ActionReducerMapBuilder<AuthSlice>) =>
       if (state.signInError === ALREADY_LOGIN) {
         state.isAuth = true
       }
-    })
-
-export const buildServiceId = (builder: ActionReducerMapBuilder<AuthSlice>) =>
-  builder
-    .addCase(getServiceId.pending, state => {
-      state.serviceIdStatus = 'pending'
-    })
-    .addCase(getServiceId.fulfilled, state => {
-      state.serviceIdStatus = 'success'
-      state.serviceIdError = null
-    })
-    .addCase(getServiceId.rejected, (state, action) => {
-      state.serviceIdStatus = 'error'
-      state.serviceIdError = handleError(action.payload)
     })
 
 export const buildRegistration = (builder: ActionReducerMapBuilder<AuthSlice>) =>

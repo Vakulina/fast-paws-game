@@ -21,6 +21,7 @@ declare global {
   interface Window {
     __INITIAL_STATE__?: StoreState
     __REDIRECT_URL__?: string
+    __CLIENT_ID__?: string
   }
 
   interface Document {

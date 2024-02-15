@@ -11,6 +11,7 @@ import { AppDispatch } from '../hooks/store'
 import { getUser } from '../store/auth/AuthActions'
 import { Routes } from '../constants/routes'
 import GameLoaderPage from '../pages/GameLoaderPage'
+import { OAuthYandexSystemPage } from '../modules/authModule/components/OAuthYandexSystemPage'
 
 export const routes = [
   {
@@ -21,6 +22,12 @@ export const routes = [
     loader: (dispatch: AppDispatch) => {
       return dispatch(getUser())
     },
+  },
+  {
+    path: Routes.OAUTH_PAGE,
+    requireUnAuth: true,
+    exact: true,
+    element: <OAuthYandexSystemPage />,
   },
   {
     path: Routes.SIGNUP,

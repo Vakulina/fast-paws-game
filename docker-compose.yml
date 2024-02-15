@@ -11,8 +11,8 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - /root/fastpaws/nginx/nginx.conf:/etc/nginx/nginx.conf
-      - /root/fastpaws/nginx/conf:/etc/nginx/conf.d
+      - /home/ilphat/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /home/ilphat/nginx/conf:/etc/nginx/conf.d
       - /etc/letsencrypt:/etc/letsencrypt
     networks:
       - fastpaws
@@ -37,7 +37,8 @@ services:
       POSTGRES_DB: ${POSTGRES_DB}
       POSTGRES_PORT: ${POSTGRES_PORT}
       POSTGRES_HOST: postgres
-      REDIRECT_URL: host.docker.internal
+      REDIRECT_URL: ${REDIRECT_URL}
+      CLIENT_ID: ${CLIENT_ID}
     command: sh -c "echo '  ➜ ⏳ Waiting for ${POSTGRES_DB}...' && ./wait-for.sh postgres:${POSTGRES_PORT} -- node /app/index.js"
     # command: sh -c "node /app/index.js"
     networks:
@@ -69,7 +70,7 @@ services:
       PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_DEFAULT_PASSWORD}
       PGADMIN_LISTEN_PORT: ${PGADMIN_LISTEN_PORT}
     ports:
-      - "${PGADMIN_PORT}:${PGADMIN_LISTEN_PORT}"
+      - '${PGADMIN_PORT}:${PGADMIN_LISTEN_PORT}'
     networks:
       - fastpaws
 
